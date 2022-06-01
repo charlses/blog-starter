@@ -4,11 +4,8 @@ import Main from '../components/Main'
 import { getSession, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { connectToDatabase } from '../util/mongodb'
-import { OneK } from '@mui/icons-material'
 
 export default function Home({ posts, articles }) {
-  console.log(articles)
-
   const router = useRouter()
 
   const { status } = useSession({
