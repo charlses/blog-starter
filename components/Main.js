@@ -4,7 +4,7 @@ import { AnimatePresence } from 'framer-motion'
 import Modal from './Modal'
 import { useRecoilState } from 'recoil'
 import { modalState, modalTypeState } from '../atoms/modalAtom'
-import Widgets from './Widgets'
+// import Widgets from './Widgets'
 
 const Main = ({ posts, articles }) => {
   const [modalOpen, setModalOpen] = useRecoilState(modalState)
@@ -16,7 +16,7 @@ const Main = ({ posts, articles }) => {
         <Feed posts={posts} />
       </div>
       {/* widgets */}
-      <Widgets articles={articles} />
+      {/* <Widgets articles={articles} /> */}
       <AnimatePresence>
         {modalOpen && (
           <Modal handleClose={() => setModalOpen(false)} type={modalType} />

@@ -5,7 +5,7 @@ import { getSession, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { connectToDatabase } from '../util/mongodb'
 
-export default function Home({ posts, articles }) {
+export default function Home({ posts }) {
   const router = useRouter()
 
   const { status } = useSession({
@@ -47,14 +47,9 @@ export async function getServerSideProps(context) {
     .sort({ timeStamp: -1 })
     .toArray()
 
-  const results = await fetch(
-    `https://newsapi.org/v2/top-headlines?category=technology&language=en&apiKey=${process.env.NEWS_API_KEY}`
-  ).then((res) => res.json())
-
   return {
     props: {
       session,
-      articles: results.articles,
       posts: posts.map((post) => ({
         _id: post._id.toString(),
         input: post.input,
