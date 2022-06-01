@@ -30,15 +30,6 @@ export default function Home({ posts }) {
 
 export async function getServerSideProps(context) {
   // Check if user is authenticated on the server
-  const session = await getSession(context)
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/home',
-        permanent: false
-      }
-    }
-  }
 
   const { db } = await connectToDatabase()
   const posts = await db
@@ -49,7 +40,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      session,
+      session: await getSession(context),
       posts: posts.map((post) => ({
         _id: post._id.toString(),
         input: post.input,
