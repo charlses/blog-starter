@@ -23,7 +23,7 @@ export default function Home({ posts }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Header />
-      <Main posts={posts} articles={articles} />
+      <Main posts={posts} />
     </div>
   )
 }
@@ -34,7 +34,6 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        permanent: false,
         destination: '/home'
       }
     }
