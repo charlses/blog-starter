@@ -18,7 +18,6 @@ export default NextAuth({
     signIn: '/home'
   },
   session: {
-    strategy: 'jwt',
-    debug: true
+    strategy: 'jwt'
   }
 })
