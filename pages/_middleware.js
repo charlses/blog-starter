@@ -5,10 +5,9 @@ export async function middleware(req) {
   if (req.nextUrl.pathname === '/') {
     const session = await getToken({
       req,
-      secret: process.env.JWT_SECRET,
-      secureCookie: process.env.NODE_ENV === 'production'
+      secret: process.env.JWT_SECRET
     })
 
-    if (!session) return NextResponse.redirect(new URL('/home', req.url))
+    if (!session) NextResponse.redirect(new URL('/home', req.url))
   }
 }
