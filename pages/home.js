@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className='space-y-10 relative'>
       <Head>
-        <title>Fullstack Test</title>
+        <title>Tech Phoenix | Blog test</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <MainHeader />
