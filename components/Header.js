@@ -10,7 +10,6 @@ import {
 } from '@mui/icons-material'
 import HeaderLink from './HeaderLink'
 import { Avatar } from '@mui/material'
-import { signOut, useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useTheme } from 'next-themes'
@@ -26,8 +25,6 @@ const Header = () => {
   const { setTheme, resolvedTheme, theme } = useTheme()
 
   useEffect(() => setMounted(true), [])
-
-  const { data: session } = useSession()
 
   return (
     <header className='sticky top-0 z-40 bg-white dark:bg-gray-900 flex items-center justify-around py-1.5 px-3 focus-within:shadow-lg'>

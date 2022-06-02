@@ -5,7 +5,7 @@ import { getSession, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { connectToDatabase } from '../util/mongodb'
 
-export default function Home({ posts }) {
+export default function Home({ posts, articles }) {
   const router = useRouter()
 
   const { status } = useSession({
@@ -23,24 +23,40 @@ export default function Home({ posts }) {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Header />
-      <Main posts={posts} />
+      <Main posts={posts} articles={articles} />
     </div>
   )
 }
 
 export async function getServerSideProps(context) {
   // Check if user is authenticated on the server
+  const session = await getSession(context)
+
+  if (!session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/home'
+      }
+    }
+  }
 
   const { db } = await connectToDatabase()
+
   const posts = await db
     .collection('posts')
     .find()
     .sort({ timeStamp: -1 })
     .toArray()
 
+  const results = await fetch(
+    `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${process.env.NEWS_API_KEY}`
+  ).then((res) => res.json())
+
   return {
     props: {
-      session: await getSession(context),
+      session,
+      articles: results.articles,
       posts: posts.map((post) => ({
         _id: post._id.toString(),
         input: post.input,
