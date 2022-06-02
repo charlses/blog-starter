@@ -11,7 +11,7 @@ import { Avatar, IconButton } from '@mui/material'
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { modalState, modalTypeState } from '../atoms/modalAtom'
-import { getPostState, handlePostSTate } from '../atoms/postAtom'
+import { getPostState, handlePostState } from '../atoms/postAtom'
 import { useSession } from 'next-auth/react'
 import TimeAgo from 'timeago-react'
 
@@ -20,7 +20,7 @@ const Post = ({ post, modalPost }) => {
   const [modalType, setModalType] = useRecoilState(modalTypeState)
   const [showInput, setShowInput] = useState(false)
   const [postState, setPostState] = useRecoilState(getPostState)
-  const [handlePost, setHandlePost] = useRecoilState(handlePostSTate)
+  const [handlePost, setHandlePost] = useRecoilState(handlePostState)
   const [liked, setLiked] = useState(false)
   const { data: session } = useSession()
 

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
-import { handlePostSTate, useSSRPostsState } from '../atoms/postAtom'
+import { handlePostState, useSSRPostsState } from '../atoms/postAtom'
 import Input from './Input'
 import Post from './Post'
 
 const Feed = ({ posts }) => {
   const [realTimePosts, setRealtimePosts] = useState([])
-  const [handlePost, setHandlePost] = useRecoilState(handlePostSTate)
+  const [handlePost, setHandlePost] = useRecoilState(handlePostState)
   const [useSSRPosts, setUseSSRPosts] = useRecoilState(useSSRPostsState)
 
   const fetchPost = async () => {
