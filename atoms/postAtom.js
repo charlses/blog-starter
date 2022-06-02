@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 
-export const handlePostSTate = atom({
+export const handlePostState = atom({
   key: 'handlePostState',
   default: false
 })

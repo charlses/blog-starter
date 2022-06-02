@@ -11,6 +11,7 @@ export default function Home({ posts, articles }) {
   const { status } = useSession({
     required: true,
     onUnauthenticated() {
+      // The user is not authenticated, handle it here.
       router.push('/home')
     }
   })
@@ -41,14 +42,16 @@ export async function getServerSideProps(context) {
     }
   }
 
+  //posts
   const { db } = await connectToDatabase()
 
   const posts = await db
     .collection('posts')
     .find()
-    .sort({ timeStamp: -1 })
+    .sort({ timestamp: -1 })
     .toArray()
 
+  // Google news api
   const results = await fetch(
     `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${process.env.NEWS_API_KEY}`
   ).then((res) => res.json())
